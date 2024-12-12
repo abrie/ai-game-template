@@ -73,36 +73,33 @@ class TilemapManager {
 		layer.setCollision(range);
 	}
 
-	public setTile(
-		layerName: string,
+	private setTile(
+		layer: Phaser.Tilemaps.TilemapLayer,
 		x: number,
 		y: number,
-		tilesetImageName: string,
+		tileset: Phaser.Tilemaps.Tileset,
 	) {
-		const tilesetImage = this.tilesetImages[tilesetImageName];
-		if (!tilesetImage) {
-			throw new Error(
-				`Unable to find a tilesetImage named ${tilesetImageName}`,
-			);
-		}
-
-		const layer = this.layers[layerName];
-		if (!layer) {
-			throw new Error(`Unable to find layer named ${layerName}`);
-		}
-
 		const tileIndex = Phaser.Math.Between(
-			tilesetImage.firstgid,
-			tilesetImage.firstgid + tilesetImage.total - 1,
+			tileset.firstgid,
+			tileset.firstgid + tileset.total - 1,
 		);
 
 		this.tilemap.putTileAt(tileIndex, x, y, true, layer);
 	}
 
-	public populateTilemap(layerName: string, map: string[][]) {
+	public populateTilemap(layerName: string, map: TextureParameters[][]) {
+		const layer = this.layers[layerName];
+		if (!layer) {
+			throw new Error(`Failed to find layer ${layerName}`);
+		}
+
 		for (let y = 0; y < map.length; y++) {
 			for (let x = 0; x < map[y].length; x++) {
-				this.setTile(layerName, x, y, map[y][x]);
+				const tileset = this.tilesetImages[map[y][x].name];
+				if (!tileset) {
+					throw new Error(`Failed to find tileset`);
+				}
+				this.setTile(layer, x, y, tileset);
 			}
 		}
 	}
