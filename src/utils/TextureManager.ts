@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-interface TextureParameters {
+export interface TextureParameters {
 	name: string;
 	height: number;
 	width: number;
@@ -11,64 +11,12 @@ interface TextureParameters {
 	noise: boolean;
 }
 
-type TextureDictionary = Record<string, TextureParameters>;
+export type TextureDictionary = Record<string, TextureParameters>;
 
 class TextureManager {
-	static Textures: TextureDictionary = {
-		PLAYER: {
-			name: "player",
-			height: 12,
-			width: 12,
-			count: 1,
-			color: 0x0000ff,
-			margin: 0,
-			spacing: 0,
-			noise: false,
-		},
-		EMPTY_TILE: {
-			name: "empty",
-			height: 12,
-			width: 12,
-			count: 1,
-			color: 0x000000,
-			margin: 0,
-			spacing: 0,
-			noise: false,
-		},
-		FILLED_TILE: {
-			name: "filled",
-			height: 12,
-			width: 12,
-			count: 10,
-			color: 0xf0aa00,
-			margin: 0,
-			spacing: 0,
-			noise: true,
-		},
-		LOOT: {
-			name: "loot",
-			height: 12,
-			width: 12,
-			count: 1,
-			color: 0x00ff00,
-			margin: 0,
-			spacing: 0,
-			noise: false,
-		},
-	};
-
 	static generateTextureIfNotExists(
 		scene: Phaser.Scene,
-		texture: {
-			name: string;
-			height: number;
-			width: number;
-			count: number;
-			color: number;
-			margin: number;
-			spacing: number;
-			noise: boolean;
-		},
+		texture: TextureParameters,
 	) {
 		if (!scene.textures.exists(texture.name)) {
 			this.generateTexture(scene, texture);

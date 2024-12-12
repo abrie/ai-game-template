@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import TextureManager from "../utils/TextureManager";
+import Assets from "../assets";
 
 class PlayScene extends Phaser.Scene {
 	constructor() {
@@ -8,7 +9,7 @@ class PlayScene extends Phaser.Scene {
 
 	preload() {
 		// Load assets here
-		TextureManager.generateAllTextures(this, TextureManager.Textures);
+		TextureManager.generateAllTextures(this, Assets.Textures);
 	}
 
 	create() {}
