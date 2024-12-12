@@ -30,7 +30,12 @@ class PlayScene extends Phaser.Scene {
 			Assets.Textures.EMPTY_TILE,
 		]);
 
-		const arr = MapGenerator.generateMap(Assets.MapWidth, Assets.MapHeight);
+		const arr = MapGenerator.generateMap(
+			Assets.MapWidth,
+			Assets.MapHeight,
+			Assets.Textures.FILLED_TILE,
+			Assets.Textures.EMPTY_TILE,
+		);
 		tilemap.populateTilemap("layer", arr);
 	}
 
