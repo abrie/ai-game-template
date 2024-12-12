@@ -1,10 +1,11 @@
 import Phaser from "phaser";
+import Assets from "./assets";
 import PlayScene from "./scenes/PlayScene";
 
 const config = {
 	type: Phaser.AUTO,
-	width: 800,
-	height: 600,
+	width: Assets.CanvasWidth,
+	height: Assets.CanvasHeight,
 	scene: [PlayScene],
 	physics: {
 		default: "arcade",

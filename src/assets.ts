@@ -2,6 +2,10 @@ import { TextureDictionary } from "./utils/TextureManager";
 
 export default class Assets {
 	static CellSize = 12;
+	static CanvasWidth = 800;
+	static CanvasHeight = 600;
+	static MapWidth = Assets.CanvasWidth / Assets.CellSize;
+	static MapHeight = Assets.CanvasHeight / Assets.CellSize;
 	static Textures: TextureDictionary = {
 		PLAYER: {
 			name: "player",
