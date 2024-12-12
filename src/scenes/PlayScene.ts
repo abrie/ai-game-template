@@ -3,6 +3,7 @@ import { TextureParameters } from "../utils/TextureManager";
 import TextureManager from "../utils/TextureManager";
 import TilemapManager from "../utils/TilemapManager";
 import Assets from "../assets";
+import MapGenerator from "../utils/MapGenerator";
 
 class PlayScene extends Phaser.Scene {
 	constructor() {
@@ -29,27 +30,16 @@ class PlayScene extends Phaser.Scene {
 			Assets.Textures.EMPTY_TILE,
 		]);
 
-		const arr = this.generateRandomTilemap(Assets.MapWidth, Assets.MapHeight);
+		const arr = MapGenerator.generateMap(
+			Assets.MapWidth,
+			Assets.MapHeight,
+			Assets.Textures.FILLED_TILE,
+			Assets.Textures.EMPTY_TILE,
+		);
 		tilemap.populateTilemap("layer", arr);
 	}
 
 	update() {}
-
-	generateRandomTilemap(width: number, height: number): TextureParameters[][] {
-		const map: TextureParameters[][] = [];
-		for (let y = 0; y < height; y++) {
-			const row: TextureParameters[] = [];
-			for (let x = 0; x < width; x++) {
-				const tile =
-					Math.random() < 0.5
-						? Assets.Textures.FILLED_TILE
-						: Assets.Textures.EMPTY_TILE;
-				row.push(tile);
-			}
-			map.push(row);
-		}
-		return map;
-	}
 }
 
 export default PlayScene;
